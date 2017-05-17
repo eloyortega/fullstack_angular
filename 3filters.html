@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+
+<head>
+	<script src="angular.min.js"></script>
+	<script src="app.js"></script>
+</head>
+
+<body>
+	<div ng-app="appName" ng-controller="ctrl">
+		<input type="text" ng-model="fn"><br> {{fn | uppercase }}<br> {{fn | lowercase }}<br>
+		<input type="number" ng-model="cost"><br> {{cost | currency }}<br>
+
+		<div ng-init="pplObj=[
+					{name:'Jani',country:'Norway'},
+					{name:'Hege',country:'Sweden'},
+					{name:'Kai',country:'Denmark'}]">
+			<ul>
+				<li ng-repeat="x in pplObj | orderBy:'-country'">
+					{{ x.name + ', ' + x.country }}
+				</li>
+			</ul>
+			<table border="1" width="100%">
+				<tr>
+					<th ng-click="orderByMe('name')">Name</th>
+					<th ng-click="orderByMe('country')">Country</th>
+				</tr>
+				<tr ng-repeat="x in pplObj | orderBy:myOrderBy">
+					<td>{{x.name}}</td>
+					<td>{{x.country}}</td>
+				</tr>
+			</table>
+			<pre>{{pplObj | json}}</pre>
+		</div>
+
+		<p>Date = {{ today | date }}</p>
+		<p>Date = {{ today | date: 'medium' }}</p>
+		<p>Date = {{ today | date: 'MM/dd/yy' }}</p>
+		<p>{{no | number: 5}}</p>
+
+		<div ng-init="pplArr = ['Jani', 'Carl', 'Margareth', 'Hege', 'Joe', 'Gustav', 'Birgit', 'Mary', 'Kai' ]"></div>
+		<p><input type="text" ng-model="tf"></p>
+		<ul>
+			<li ng-repeat="x in pplArr | orderBy | filter:tf">
+				{{ x }}
+			</li>
+		</ul>
+		<hr>
+		<ul>
+			<li ng-repeat="x in pplArr | limitTo : 3">
+				{{ x }}
+			</li>
+		</ul>
+	</div>
+
+	<script>
+		app = angular.module('appName', [])
+		app.controller('ctrl', function($scope) {
+			$scope.orderByMe = function(x) {
+				$scope.myOrderBy = x;
+			}
+			$scope.today = new Date();
+			$scope.no = 1000000.09;
+		});
+		//$('p').hide();
+	</script>
+
+</body>
+
+</html>
