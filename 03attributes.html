@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+	<script src="angular.min.js"></script>
+	<style>
+		/*default style*/
+		*{
+			font-size:30px;
+		}
+	</style>
+</head>
+
+<body>
+	<div ng-app>
+			<p>ng-src, ng-href, ng-style: Using AngularJS markup like {{hash}} in a src attribute doesn't work right: The browser will fetch from the URL with the literal text {{hash}} until AngularJS replaces the expression inside {{hash}}. The ngSrc directive solves this problem.</p>
+
+			<pre>
+				The wrong way to write it:
+				<a href="{{hash}}">link</a>
+				The correct way to write it:
+				<a ng-href="{{hash}}">link</a>
+			</pre>
+
+			<p ng-init="img='img1.jpg'">example</p>
+
+			<input ng-model="img">
+			<p>{{img}}</p>
+			<img ng-src={{img}}>
+
+<!-- uncomment the line below and run console log to see the errors-->
+<!--		<img src={{img}}> -->
+
+	</div>
+</body>
+</html>

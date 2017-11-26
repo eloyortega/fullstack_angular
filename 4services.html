@@ -22,13 +22,16 @@
 				<select ng-model="c" ng-options="k as v.name for (k,v) in d"></select>
 			</form>
 			<p>selected = {{b}}{{b.name}}</p>
-			<p>selected = {{c}}{{v.name}}</p>
+			<p>selected = {{c}}{{k}}</p>
+		<div ng-include="'includethis.html'"></div>
+
 
 
 		</div>
 		<hr>
 		<div ng-controller="c2">{{myHeader}}</div>
 		<div ng-controller="c3"><h1>{{theTime}}</h1></div>
+		
 
 	</div>
 

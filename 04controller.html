@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+	<script src="angular.min.js"></script>
+	<script src="app.js"></script>
+	<style>
+		/*default style*/
+		*{
+			font-size:30px;
+		}
+	</style>
+</head>
+<body>
+	<div ng-app="appName">
+		<div ng-controller="appCtrl">
+			<h1>controllers: control the data of an AngularJS applications.</h1>
+			<hr>
+
+<!-- The defaults for the data are now declared in the controller below -->
+			First Name: <input type="text" ng-model="fn">
+			<br>
+			Last Name: <input type="text" ng-model="ln">
+			<br><br>
+
+<!-- 2 ways to generate data from the inputs above -->
+<!-- express it like so -->
+			Full Name: {{fn + " " + ln}}<br> 
+
+<!-- or in a function call which is declared in the controller -->
+			Full Name: {{full()}}<br><br>
+
+<!-- you can control data with any function you build in a controller -->
+			<a href="#" ng-click="changeName()">change</a><br> 
+
+<!-- and looping through ng-repeat work with data from a controller too  -->
+			<ul>
+				<li ng-repeat="x in names">
+					{{ x.name + ', ' + x.country }}
+				</li>
+			</ul>
+
+		</div>
+
+<!-- although this div calls fn, it's outside of the div which established the controller so is independant of any changes or function calls set above -->
+		<div>
+			<input type="text" ng-model="fn"> {{fn}}
+		</div>
+	</div>
+	<script>
+//store the ng module (application) to a variable
+		var app = angular.module('appName', []);
+
+//attach a controller to the app called appCtrl. A service to declare data in the controller is called scope. So we establish $scope as a parameter.
+		app.controller('appCtrl', function($scope) {
+
+//using $scope we can call ng variables
+			$scope.fn = "Jackie";
+			$scope.ln = "Chan";
+
+//or functions
+			$scope.full = function() {
+				return $scope.fn + " " + $scope.ln;
+			};
+
+			$scope.changeName = function() {
+				$scope.fn = "Nelly";
+				$scope.ln = "Fatado";
+			};
+
+//or multidimensional arrays
+			$scope.names = [{
+					name: 'Jani',
+					country: 'Norway'
+				},
+				{
+					name: 'Hege',
+					country: 'Sweden'
+				},
+				{
+					name: 'Kai',
+					country: 'Denmark'
+				}
+			];
+
+});
+	</script>
+</body>
+</html>

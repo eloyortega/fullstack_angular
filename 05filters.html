@@ -1,13 +1,28 @@
 <!doctype html>
 <html>
-
 <head>
 	<script src="angular.min.js"></script>
 	<script src="app.js"></script>
+	<style>
+		*{
+			font-size:30px;
+		}
+	</style>
 </head>
-
 <body>
 	<div ng-app="appName" ng-controller="ctrl">
+		<h1>Filters can be added in AngularJS to format data.</h1>
+
+Ex.
+currency Format a number to a currency format.
+date Format a date to a specified format.
+filter Select a subset of items from an array.
+json Format an object to a JSON string.
+limitTo Limits an array/string, into a specified number of elements/characters.
+lowercase Format a string to lower case.
+number Format a number to a string.
+orderBy Orders an array by an expression.
+uppercase Format a string to upper case.
 		<input type="text" ng-model="fn"><br> {{fn | uppercase }}<br> {{fn | lowercase }}<br>
 		<input type="number" ng-model="cost"><br> {{cost | currency }}<br>
 
@@ -36,7 +51,10 @@
 		<p>Date = {{ today | date }}</p>
 		<p>Date = {{ today | date: 'medium' }}</p>
 		<p>Date = {{ today | date: 'MM/dd/yy' }}</p>
-		<p>{{no | number: 5}}</p>
+		<input type="text" ng-model="no">
+		<p>{{no | number: 5}}<br>
+		is num: {{x2}}</p>
+		
 
 		<div ng-init="pplArr = ['Jani', 'Carl', 'Margareth', 'Hege', 'Joe', 'Gustav', 'Birgit', 'Mary', 'Kai' ]"></div>
 		<p><input type="text" ng-model="tf"></p>
@@ -60,7 +78,9 @@
 				$scope.myOrderBy = x;
 			}
 			$scope.today = new Date();
-			$scope.no = 1000000.09;
+			$scope.no = 1000.09;
+			$scope.x2 = angular.isNumber($scope.no);
+			no = $scope.no;
 		});
 		//$('p').hide();
 	</script>

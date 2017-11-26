@@ -1,0 +1,110 @@
+to add
+.run
+rootscope
+console log
+testing
+jquery
+
+filters: Filters can be added in AngularJS to format data.
+Ex.
+currency Format a number to a currency format.
+date Format a date to a specified format.
+filter Select a subset of items from an array.
+json Format an object to a JSON string.
+limitTo Limits an array/string, into a specified number of elements/characters.
+lowercase Format a string to lower case.
+number Format a number to a string.
+orderBy Orders an array by an expression.
+uppercase Format a string to upper case.
+
+
+
+services: a function, or object, that is available for, and limited to, your AngularJS application.
+$scope, $http, $timeout, $interval
+
+
+
+Events: HTML events directives
+ng-blur
+ng-change
+ng-click
+ng-copy
+ng-cut
+ng-dblclick
+ng-focus
+ng-keydown
+ng-keypress
+ng-keyup
+ng-mousedown
+ng-mouseenter
+ng-mouseleave
+ng-mousemove
+ng-mouseover
+ng-mouseup
+ng-paste
+
+
+Libraries: animate and route
+
+JQlite:
+$(selector).method()
+AngularJS's jqLite
+jqLite provides only the following jQuery methods:
+
+addClass() - Does not support a function as first argument
+after()
+append()
+attr() - Does not support functions as parameters
+bind() (deprecated, use on()) - Does not support namespaces, selectors or eventData
+children() - Does not support selectors
+clone()
+contents()
+css() - Only retrieves inline-styles, does not call getComputedStyle(). As a setter, does not convert numbers to strings or append 'px', and also does not have automatic property prefixing.
+data()
+detach()
+empty()
+eq()
+find() - Limited to lookups by tag name
+hasClass()
+html()
+next() - Does not support selectors
+on() - Does not support namespaces, selectors or eventData
+off() - Does not support namespaces, selectors or event object as parameter
+one() - Does not support namespaces or selectors
+parent() - Does not support selectors
+prepend()
+prop()
+ready() (deprecated, use angular.element(callback) instead of angular.element(document).ready(callback))
+remove()
+removeAttr() - Does not support multiple attributes
+removeClass() - Does not support a function as first argument
+removeData()
+replaceWith()
+text()
+toggleClass() - Does not support a function as first argument
+triggerHandler() - Passes a dummy event object to handlers
+unbind() (deprecated, use off()) - Does not support namespaces or event object as parameter
+val()
+wrap()
+jQuery/jqLite Extras
+AngularJS also provides the following additional methods and events to both jQuery and jqLite:
+
+Events
+$destroy - AngularJS intercepts all jqLite/jQuery's DOM destruction apis and fires this event on all DOM nodes being removed. This can be used to clean up any 3rd party bindings to the DOM element before it is removed.
+Methods
+controller(name) - retrieves the controller of the current element or its parent. By default retrieves controller associated with the ngController directive. If name is provided as camelCase directive name, then the controller for this directive will be retrieved (e.g. 'ngModel').
+injector() - retrieves the injector of the current element or its parent.
+scope() - retrieves the scope of the current element or its parent. Requires Debug Data to be enabled.
+isolateScope() - retrieves an isolate scope if one is attached directly to the current element. This getter should be used only on elements that contain a directive which starts a new isolate scope. Calling scope() on this element always returns the original non-isolate scope. Requires Debug Data to be enabled.
+inheritedData() - same as data(), but walks up the DOM until a value is found or the top parent element is reached.
+
+
+
+
+
+
+
+angular.element($0).scope().x
+"Carl"
+
+

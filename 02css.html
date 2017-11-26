@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+<!-- add Angular script-->
+	<script src="angular.min.js"></script>
+
+<!-- Angular adds classes to inputs based on status -->
+	<style>
+		/*default style*/
+		*{
+			font-size:30px;
+		}
+
+		/*different states of an input will trigger classes to change on inputs */
+
+		/*classes to track if input is empty*/
+		input.ng-empty {
+			border: 1px #f00 solid;
+		}
+		input.ng-not-empty {
+			border: 1px #ccc solid;
+		}
+
+		/*or if the user clicked into the input or left*/
+		input.ng-untouched {
+			background-color: #ddd;
+		}
+		input.ng-touched {
+			background-color: #fff;
+		}
+
+		/*or if the input is valid*/
+		input.ng-invalid {
+			color: #f00;
+		}
+		input.ng-valid {
+			color: #000;
+		}
+
+		/*track if input has been changed at all*/
+		/*
+		input.ng-dirty {
+			background-color: #888;
+		}
+		
+		input.ng-pristine {
+			background-color: #ccc;
+		}
+		*/
+
+	</style>
+</head>
+
+<body>
+
+<!-- specify where your app (Module) starts using ng-app   -->
+	<div ng-app>
+		<h1>App starts here</h1>
+
+<!-- remember those classes Angular adds, we can see it take affect here -->
+		<form>
+			Email:<br>
+			<input type="email" name="myAddress" ng-model="text">
+		</form>
+
+<!--the states ofthe input return booleans which we can check against -->
+		<p ng-show="myForm.myAddress.$error.email">Not a valid e-mail address</p>
+		<p ng-show="myForm.myAddress.$touched && myForm.myAddress.$invalid">The name is required.</p>
+
+		<p>
+			criteria met: {{myForm.myAddress.$valid}}<br>
+			data changed: {{myForm.myAddress.$dirty}}<br>
+			input focus: {{myForm.myAddress.$touched}}<br>
+			valid: {{myForm.myAddress.$valid}}<br>
+		</p>
+
+<!-- now we close out the Module-->
+	</div>
+</body>
+</html>
