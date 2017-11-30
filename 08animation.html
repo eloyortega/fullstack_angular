@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+<style>
+/*default style*/
+	*{
+		font-size:30px;
+	}
+
+/*this animation will run when nghide is assigned to our element*/
+	@keyframes myChange {
+		0% {
+			height: 100px;
+		}
+		100%{
+			height: 0;
+			background-color: aqua;
+		}
+	}
+
+	div {
+		height: 100px;
+		background-color: lightblue;
+	}
+
+/*this will trigger the animation above when hidden*/
+	div.ng-hide {
+		animation: 0.5s myChange;
+	}
+</style>
+</head>
+<body ng-app="myApp">
+
+	<h1>Add animations to your Angular View</h1>
+
+<!--As seen before, we can hide elements using ng-hide when vars return as true... -->
+	<span ng-init="myCheck=false"></span>
+
+	Hide the DIV: <input type="checkbox" ng-model="myCheck">
+
+	<p>{{myCheck}}</p>
+	<div ng-hide="myCheck">
+		<p>animations can be triggered on any of the following classes: ng-show, ng-hide, ng-class, ng-view, ng-include, ng-repeat, ng-if, ng-switch</p>
+	</div>
+
+	<script src="assets/js/angular.min.js"></script>
+<!-- but this time, we can use a the animate script to allow angular to work with css animations -->
+	<script src="assets/js/angular-animate.min.js"></script>
+	<script>
+
+//after adding the animate script, we now add the dependant module as a parameter in our application
+		var app = angular.module('myApp', ['ngAnimate']);
+
+	</script>
+</body>
+</html>

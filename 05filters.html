@@ -1,9 +1,8 @@
 <!doctype html>
 <html>
 <head>
-	<script src="angular.min.js"></script>
-	<script src="app.js"></script>
 	<style>
+		/*default style*/
 		*{
 			font-size:30px;
 		}
@@ -12,35 +11,45 @@
 <body>
 	<div ng-app="appName" ng-controller="ctrl">
 		<h1>Filters can be added in AngularJS to format data.</h1>
+		<p>
+			Currency: Format a number to a currency.<br>
+			Date: Format a date to a specified format.<br>
+			Filter: Select a subset of items from an array.<br>
+			Json: Format an object to a JSON string.<br>
+			LimitTo: Limits an array/string, into a specified number of elements/characters.<br>
+			Lowercase: Format a string to lower case.<br>
+			Uppercase: Format a string to upper case.<br>
+			Number: Format a number to a string.<br>
+			OrderBy: Orders an array by an expression.<br>
+		</p>
 
-Ex.
-currency Format a number to a currency format.
-date Format a date to a specified format.
-filter Select a subset of items from an array.
-json Format an object to a JSON string.
-limitTo Limits an array/string, into a specified number of elements/characters.
-lowercase Format a string to lower case.
-number Format a number to a string.
-orderBy Orders an array by an expression.
-uppercase Format a string to upper case.
-		<input type="text" ng-model="fn"><br> {{fn | uppercase }}<br> {{fn | lowercase }}<br>
+<!-- use a pipe followed by filter -->
+		<input type="text" ng-model="fn"><br>
+		{{fn | uppercase }}<br>
+		{{fn | lowercase }}<br>
+
 		<input type="number" ng-model="cost"><br> {{cost | currency }}<br>
 
+<!-- here's an object that contains arrays -->
 		<div ng-init="pplObj=[
 					{name:'Jani',country:'Norway'},
 					{name:'Hege',country:'Sweden'},
 					{name:'Kai',country:'Denmark'}]">
+
+<!-- we can use filters to sort the array. Use a "-" to reverse the order-->
 			<ul>
 				<li ng-repeat="x in pplObj | orderBy:'-country'">
 					{{ x.name + ', ' + x.country }}
 				</li>
 			</ul>
+
+<!-- we can also sort on click. see the function below. -->
 			<table border="1" width="100%">
 				<tr>
-					<th ng-click="orderByMe('name')">Name</th>
-					<th ng-click="orderByMe('country')">Country</th>
+					<th ng-click="orderBy('name')">Name</th>
+					<th ng-click="orderBy('country')">Country</th>
 				</tr>
-				<tr ng-repeat="x in pplObj | orderBy:myOrderBy">
+				<tr ng-repeat="x in pplObj | orderBy:y">
 					<td>{{x.name}}</td>
 					<td>{{x.country}}</td>
 				</tr>
@@ -48,14 +57,16 @@ uppercase Format a string to upper case.
 			<pre>{{pplObj | json}}</pre>
 		</div>
 
+<!-- ng also offers some date formatting in filters-->
 		<p>Date = {{ today | date }}</p>
 		<p>Date = {{ today | date: 'medium' }}</p>
 		<p>Date = {{ today | date: 'MM/dd/yy' }}</p>
-		<input type="text" ng-model="no">
-		<p>{{no | number: 5}}<br>
-		is num: {{x2}}</p>
-		
 
+<!-- as well as number formatting -->
+		<input type="text" ng-model="no">
+		<p>{{no | number: 5}}</p>
+
+<!-- filtering can also be used to limit data to an input -->
 		<div ng-init="pplArr = ['Jani', 'Carl', 'Margareth', 'Hege', 'Joe', 'Gustav', 'Birgit', 'Mary', 'Kai' ]"></div>
 		<p><input type="text" ng-model="tf"></p>
 		<ul>
@@ -64,27 +75,37 @@ uppercase Format a string to upper case.
 			</li>
 		</ul>
 		<hr>
+
+<!-- or cap a dataset. note how we can chain multiple filters-->
 		<ul>
-			<li ng-repeat="x in pplArr | limitTo : 3">
+			<li ng-repeat="x in pplArr | orderBy | filter:tf | limitTo : 3">
 				{{ x }}
 			</li>
 		</ul>
+
 	</div>
 
+	<script src="assets/js/angular.min.js"></script>
+	<script src="assets/js/app.js"></script>
+
 	<script>
-		app = angular.module('appName', [])
+
+// define the application
+		app = angular.module('appName', []);
+
+//define the controller
 		app.controller('ctrl', function($scope) {
-			$scope.orderByMe = function(x) {
-				$scope.myOrderBy = x;
-			}
+
+//function to sort. all this function does is pass a aurgument into var "y"
+			$scope.orderBy = function(x) {
+				$scope.y = x;
+			};
+
+//some more vars to be used above
 			$scope.today = new Date();
 			$scope.no = 1000.09;
-			$scope.x2 = angular.isNumber($scope.no);
-			no = $scope.no;
+
 		});
-		//$('p').hide();
 	</script>
-
 </body>
-
 </html>

@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+	<style>
+		/*default style*/
+		*{
+			font-size:30px;
+		}
+	</style>
+</head>
+<body>
+	<div ng-app="appName">
+		<p>Services: a function, or object, that is available for, and limited to, your AngularJS application.<br>
+			<b>Examples:</b><br>
+			$scope, $http, $timeout, $interval
+		</p>
+
+<!-- This application has a few controllers. This is the first.-->
+		<div ng-controller="c1">
+<!-- Use $http to generate an HTTP request (ajax). below shows the responses for the request-->
+			<p><b>data:</b><br> 
+				{{d}}
+			</p>
+			<p><b>config:</b><br>
+				{{c}}
+			</p>
+			<p><b>headers:</b><br>
+				{{h}}
+			</p>
+			<p><b>status:</b><br>
+				{{s}}
+			</p>
+			<p><b>status text:</b><br>
+				{{t}}
+			</p>
+			<p><b>confirmation:</b>
+				{{m}}
+			</p>
+
+<!--Use the data from the http request in your application-->
+			<p ng-repeat="(k,v) in d">
+				{{$index}} - {{k}}: {{v.name}}, {{v.country}}
+			</p>
+
+			<select ng-model="a" ng-options="v.name for (k,v) in d"></select>
+			<p>selected = <br>
+				{{a}}<br>
+				{{a.name}}<br>
+				{{a.country}}
+			</p>
+
+			<select ng-model="b" ng-options="k as v.country for (k,v) in d"></select>
+			<p>selected = <br>
+				{{b}}<br>
+				{{d[b].name}}<br>
+				{{d[b].country}}
+			</p>
+		</div>
+
+		<hr>
+
+<!-- this is contains the second controller which uses js timeout as a service-->
+		<div ng-controller="c2">{{myHeader}}</div>
+
+<!-- this is contains the third controller which uses js interval as a service-->
+		<div ng-controller="c3"><h1>{{theTime}}</h1></div>
+		
+
+	</div>
+
+	<script src="assets/js/angular.min.js"></script>
+	<script src="assets/js/app.js"></script>
+
+	<script>
+		var app = angular.module('appName', []);
+
+//first controller uses scope and http services
+		app.controller('c1', function($scope, $http) {
+
+//$http will ajax data
+			$http.get("assets/data/test.json")
+
+//we can then check the response for a successful call
+				.then(function(response) {
+					$scope.d = response.data;
+					$scope.c = response.config;
+					$scope.h = response.headers;
+					$scope.s = response.status;
+					$scope.t = response.statusText;
+					$scope.m = "got it";
+				},
+//or a failed one
+				function(response) {
+					$scope.d = response.data;
+					$scope.c = response.config;
+					$scope.h = response.headers;
+					$scope.s = response.status;
+					$scope.t = response.statusText;
+					$scope.m = "didn't get it";
+				});
+
+			});
+
+//this controller uses the services scope and timeout
+		app.controller('c2', function($scope, $timeout) {
+
+//heres a var
+			$scope.myHeader = "Hello World!";
+
+//which we can reassign after a 2 second delay using the angular timeout service
+			$timeout(function() {
+				$scope.myHeader = "How are you today?";
+			}, 2000);
+
+		});
+
+//similarly this controller uses a interval service which will update the date object every second
+		app.controller('c3', function($scope, $interval) {
+
+			$scope.theTime = new Date().toLocaleTimeString();
+
+			$interval(function () {
+				$scope.theTime = new Date().toLocaleTimeString();
+			}, 1000);
+
+		});
+	</script>
+</body>
+</html>

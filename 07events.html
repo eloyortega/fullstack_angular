@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+	<style>
+		/*default style*/
+		*{
+			font-size:30px;
+		}
+	</style>
+</head>
+<body>
+	<div ng-app="myApp" ng-controller="myCtrl">
+		<h1>bind events to your angular data</h1>
+
+<!-- click events -->
+		<button ng-click="a = 'clicked'">Click me!</button>
+		<p>{{a}}</p>
+		<hr>
+
+<!-- hover events -->
+		<h1 ng-mouseenter="b='over'" ng-mouseleave="b='leave'" id="title">hover here</h1>
+		<p>{{b}}</p>
+		<hr>
+
+<!-- change event -->
+		<textarea ng-model="d" ng-change="check()"></textarea>
+		<p>the text area changed {{e}} times</p>
+		<p>"d" is now:</p>
+		<p>{{d}}</p>
+
+	</div>
+	<script src="assets/js/angular.min.js"></script>
+	<script src="assets/js/app.js"></script>
+
+	<script>
+		var app = angular.module('myApp', []);
+		app.controller('myCtrl', function($scope) {
+//default data that changes based on events above
+			$scope.a = "click affects this";
+			$scope.b = "Affect this";
+			$scope.c = true;
+			$scope.e = 0;
+			$scope.check = function() {
+				$scope.e++;
+			};
+		});
+	</script>
+</body>
+</html>

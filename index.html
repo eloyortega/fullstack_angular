@@ -1,9 +1,6 @@
 <!doctype html>
 <html>
 <head>
-<!-- add Angular script, then your own -->
-	<script src="angular.min.js"></script>
-
 	<style>
 		*{
 			font-size:30px;
@@ -107,10 +104,60 @@
 				{{k +': '+v.age + ', ' + v.gender}}
 			</li>
 		</ul>
+
+		<hr>
+
+<!-- you can also include partials -->
+		<div ng-include="'assets/partials/includethis.html'"></div>
+
+		<hr>
+
+<!-- you can also show or hide elements if an expression evaluates to true or false  -->
+		<div ng-init="myVar=false"></div>
+		Check to show a header:
+			<input type="checkbox" ng-model="myVar">
+		<p>{{myVar}}</p>
+		<h1 ng-show="myVar">show</h1>
+		<h1 ng-hide="myVar">hide</h1>
+		<hr>
+
+<!-- you can also use ng switch tho change displays based on var assignments -->
+		Pick a topic:<br>
+		<input type="radio" ng-model="v2" value="dogs">Dogs
+		<input type="radio" ng-model="v2" value="birds">Birds
+		<input type="radio" ng-model="v2" value="cats">Cats
+
+		<br><br>
+
+		Select a topic:<br>
+		<select ng-model="v2">
+			<option value="dogs">Dogs
+			<option value="birds">Birds
+			<option value="cats">Cats
+		</select>
+
+		<div ng-switch="v2">
+			<div ng-switch-when="dogs">
+				<p>Welcome to a world of dogs.</p>
+			</div>
+			<div ng-switch-when="birds">
+				<p>Birds have Feathers.</p>
+			</div>
+			<div ng-switch-when="cats">
+				<p>Read about cats.</p>
+			</div>
+			<div ng-switch-default>
+				<p>Default message</p>
+			</div>
+		</div>
+
 <!-- now we close out the Module-->
 	</div>
 
 <!-- outside the Module, these expressions break -->
 	<h1>Outside app: {{fn + ' ' +ln}}</h1>
+
+<!-- add Angular script, then your own -->
+	<script src="assets/js/angular.min.js"></script>
 </body>
 </html>
