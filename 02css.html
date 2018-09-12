@@ -48,13 +48,26 @@
 	</style>
 </head>
 <body>
+	<nav>
+		<ul>
+			<li><a href="index.html">home</a></li>
+			<li><a href="02css.html">css</a></li>
+			<li><a href="03attributes.html">attributes</a></li>
+			<li><a href="04controller.html">controllers</a></li>
+			<li><a href="05filters.html">filters</a></li>
+			<li><a href="06services.html">services</a></li>
+			<li><a href="07events.html">events</a></li>
+			<li><a href="08animation.html">animation</a></li>
+			<li><a href="09routing.html">routing</a></li>
+		</ul>
+	</nav>
 
 <!-- specify where your app (Module) starts using ng-app   -->
 	<div ng-app>
 		<h1>App starts here</h1>
 
 <!-- remember those classes Angular adds, we can see it take affect here -->
-		<form>
+		<form name="myForm">
 			Email:<br>
 			<input type="email" name="myAddress" ng-model="text">
 		</form>
